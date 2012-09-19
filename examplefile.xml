@@ -1,3 +1,18 @@
-<make pattern='*.mp3'>
-	<call> mv intro /home/music/intros </call>
-</make>
+<?xml version="1.0"?>
+
+<script>
+	<call> echo hello script :) </call>
+	<sequence>
+		<call> echo hello call</call>
+	</sequence>
+	<loop>
+		<call> echo hello loop</call>
+	</loop>
+	<alt>
+		<call> echo hello alt</call>
+		<call> echo hello alternative call</call>
+	</alt>
+
+</script>
+
+
