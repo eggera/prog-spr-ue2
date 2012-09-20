@@ -11,14 +11,34 @@ import javax.xml.validation.SchemaFactory;
  */
 class FileUtil {
 
+
+	def visit(node) {
+		node.childNodes().each { child ->
+
+			if(child.name() == "call") {
+				println ">> call ${child.text()}"
+				def proc = child.text().trim().execute()
+				proc.waitFor()
+			}
+			visit(child)
+		}
+	}
+
+
 	static void main(args) {
-		println 'parsing script file'
-		def records = new XmlSlurper().parse("./examplefile.xml")
+
+		def fileUtil = new FileUtil()
+		println '>> parsing script file'
+		def records = new XmlSlurper().parse("./helloworld.xml")
 
 		def factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
 		def schema = factory.newSchema(new File("syntax.xsd"))
 		def validator = schema.newValidator()
-		println 'validating script file'
-		validator.validate(new StreamSource(new File("examplefile.xml")))
+		println '>> validating script file'
+		validator.validate(new StreamSource(new File("helloworld.xml")))
+
+		fileUtil.visit(records)
+
+		println '>> exit'
 	}
 }
