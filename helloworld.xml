@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- create file, write to file, and open file -->
 <script>
 	<call> touch helloworld</call>
+	<call> echo "hello world :)" > helloworld</call>
 	<call> gedit helloworld</call>
 </script>

@@ -17,7 +17,7 @@ class FileUtil {
 
 			if(child.name() == "call") {
 				println ">> call ${child.text()}"
-				def proc = child.text().trim().execute()
+				def proc = ['bash','-c',child.text().trim()].execute()
 				proc.waitFor()
 			}
 			visit(child)
